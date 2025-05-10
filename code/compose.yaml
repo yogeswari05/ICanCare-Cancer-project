@@ -1,0 +1,33 @@
+services:
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb+srv://manasagrawal206:manas123@icancare.xbyum.mongodb.net/?retryWrites=true&w=majority&appName=ICanCare
+      - CORS_ORIGIN=http://localhost:80
+      - OPENAI_API_KEY=                                                      //api key needed
+    env_file:
+      - ./backend/.env
+    networks:
+      - mern-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000  
+    depends_on:
+      - backend
+    networks:
+      - mern-network
+
+networks:
+  mern-network:
+    driver: bridge
