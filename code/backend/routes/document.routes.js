@@ -179,7 +179,7 @@ router.get('/summary/:id', authenticateToken, async (req, res) => {
             // get summary of the text
 
             const openai = new OpenAI({
-                apiKey:"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"
+                apiKey:"API KEY HERE"
               });
 
 
